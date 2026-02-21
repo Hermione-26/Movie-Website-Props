@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayCash - Settings</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+/* TOP BAR */
+.topbar {
+    background: #0b4ddb;
+    color: white;
+    padding: 15px 18px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+/* PROFILE CARD */
+.profile {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    background: #0b4ddb;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile-info h3 {
+    margin: 0;
+}
+
+.profile-info p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #666;
+}
+
+/* SETTINGS SECTIONS */
+.section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.section h4 {
+    margin: 0;
+    padding: 14px 16px;
+    background: #f7f7f7;
+    font-size: 14px;
+    color: #555;
+    border-bottom: 1px solid #eee;
+}
+
+/* SETTING ITEM */
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item span {
+    color: #333;
+}
+
+/* TOGGLE SWITCH */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+input:checked + .slider {
+    background-color: #0b4ddb;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #e53935;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.logout-btn:active {
+    transform: scale(0.98);
+}
+
+.note {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    PayCash Settings
+</div>
+
+<div class="container">
+
+    <!-- PROFILE -->
+    <div class="profile">
+        <div class="avatar">AL</div>
+        <div class="profile-info">
+            <h3>A**** L*****</h3>
+            <p>+63 9XX XXX XXXX</p>
+        </div>
+    </div>
+
+    <!-- ACCOUNT SETTINGS -->
+    <div class="section">
+        <h4>Account</h4>
+
+        <div class="setting-item">
+            <span>Edit Profile</span>
+            <span>›</span>
+        </div>
+
+        <div class="setting-item" onclick="changePassword()" style="cursor:pointer;">
+            <span>Change Password</span>
+            <span>›</span>
+        </div>
+
+        <div class="setting-item">
+            <span>Linked Bank Accounts</span>
+            <span>›</span>
+        </div>
+    </div>
+
+    <!-- SECURITY SETTINGS -->
+    <div class="section">
+        <h4>Security</h4>
+
+        <div class="setting-item">
+            <span>Biometric Login</span>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="setting-item">
+            <span>Transaction Notifications</span>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="setting-item">
+            <span>Two-Factor Authentication</span>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- LOGOUT -->
+    <button class="logout-btn" onclick="logout()">LOG OUT</button>
+
+    <div class="note">
+        *Movie prop only — no real account data.
+    </div>
+
+</div>
+
+<script>
+
+// LOGOUT
+function logout() {
+    window.location.href = "login.html";
+}
+
+// CHANGE PASSWORD (PROP ONLY)
+function changePassword() {
+    let current = prompt("Enter current password:");
+    if (!current) return;
+
+    let newPass = prompt("Enter new password:");
+    if (!newPass) return;
+
+    let confirmPass = prompt("Confirm new password:");
+    if (newPass !== confirmPass) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    alert("Password successfully changed.");
+}
+
+// TWO-FACTOR AUTH
+const tfaCheckbox = document.querySelectorAll("input[type='checkbox']")[2];
+
+tfaCheckbox.addEventListener("change", function() {
+
+    if (this.checked) {
+
+        let code = prompt("Enter verification code:");
+
+        if (code === "482931") {
+            alert("Two-Factor Authentication Enabled");
+        } else {
+            alert("Incorrect code");
+            this.checked = false;
+        }
+
+    } else {
+        alert("Two-Factor Authentication Disabled");
+    }
+
+});
+
+</script>
+
+</body>
+</html>
